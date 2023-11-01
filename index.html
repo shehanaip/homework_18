@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- first one -->
+    <h2>Shopping Cart</h2>
+
+<button onclick="decrement()">-</button>
+<input type="text" id="quantity" value="0">
+<button onclick="increment()">+</button>
+
+<!-- second one -->
+<h1>Range Slider</h1>
+
+<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+<p>Value: <span id="demo"></span></p>
+<!-- third one -->
+<h2>Password Input</h2>
+
+<input type="password" id="myInput">
+<button onclick="myFunction()"><i class="fa fa-eye" id="eyeIcon"></i></button>
+<!-- 4th one extra sorry-->
+<h2>Color Palette (select for color picker)</h2>
+
+<div id="palette"></div>
+<p id="colorCode"></p><br><br><br><br><br><br><br><br><br>
+<!-- 4th 2nd -->
+<h2>Color Picker</h2>
+
+<input type="color" id="myColorPicker">
+<!-- 5th one -->
+<h2>Current Date and Time</h2>
+
+<p id="dateTime"></p>
+<script>
+var input = document.getElementById('quantity');
+
+function increment() {
+    var value = parseInt(input.value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value < 99) {
+        value++;
+        input.value = value;
+    }
+}
+
+function decrement() {
+    var value = parseInt(input.value, 10);
+    value = isNaN(value) ? 0 : value;
+    if(value > 0) {
+        value--;
+        input.value = value;
+    }
+}
+// second one 
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+// third one
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+// 4th one sorry its extra in order to select bg color easily
+var colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"];
+
+var palette = document.getElementById("palette");
+var colorCode = document.getElementById("colorCode");
+
+for(let i = 0; i < colors.length; i++) {
+    var div = document.createElement("div");
+    div.style.backgroundColor = colors[i];
+    div.style.width = "50px";
+    div.style.height = "50px";
+    div.style.display = "inline-block";
+    div.onclick = function() {
+        colorCode.innerHTML = "Color Code: " + colors[i];
+    };
+    palette.appendChild(div);
+}
+// 4th 2nd
+var picker = document.getElementById("myColorPicker");
+
+picker.oninput = function() {
+  document.body.style.backgroundColor = this.value;
+}
+// 5th one
+function displayDateTime() {
+  var dt = new Date();
+  document.getElementById("dateTime").innerHTML = dt;
+}
+
+displayDateTime();
+setInterval(displayDateTime, 1000);
+</script>
+
+
+</body>
+</html>
